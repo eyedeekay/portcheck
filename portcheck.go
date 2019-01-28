@@ -42,10 +42,15 @@ func CheckLocal(port int, hosts ...string) (bool, error) {
 	return false, nil
 }
 
-// CL is a shortened alias for CheckLocal, which returns true if a port is in
-// use and false if a port is available.
-func CL(port int) (bool, error) {
-	return CheckLocal(port)
+// ShortCheckLocal is CheckLocal but ignoring errors
+func ShortCheckLocal(port int) bool {
+	b, _ := CheckLocal(port)
+	return b
+}
+
+// SCL is a shortened alias for ShortCheckLocal
+func SCL(port int) bool {
+	return ShortCheckLocal(port)
 }
 
 // CheckRemote tries to connect to a remote port, and returns false if it fails.
@@ -70,4 +75,15 @@ func CheckRemote(host string, port int) (bool, error) {
 // remote server is open and false if appears to be closed or unavailable.
 func CR(port int) (bool, error) {
 	return CheckLocal(port)
+}
+
+// ShortCheckRemote is CheckRemote but ignoring errors
+func ShortCheckRemote(host string, port int) bool {
+	b, _ := CheckRemote(host, port)
+	return b
+}
+
+// SCR is a shortened alias for ShortCheckRemote
+func SCR(host string, port int) bool {
+	return ShortCheckRemote(host, port)
 }
