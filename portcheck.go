@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	//"log"
 )
 
 func typeof(v interface{}) string {
@@ -51,6 +52,30 @@ func ShortCheckLocal(port int) bool {
 // SCL is a shortened alias for ShortCheckLocal
 func SCL(port int) bool {
 	return ShortCheckLocal(port)
+}
+
+func FindLocal(port int) int {
+
+	server, err := net.Listen("tcp", ":0")
+
+	if err != nil {
+		return 0
+	}
+
+	defer server.Close()
+
+	hostString := server.Addr().String()
+
+	_, portString, err := net.SplitHostPort(hostString)
+	if err != nil {
+		return 0
+	}
+
+	n, err := strconv.Atoi(portString)
+	if err != nil {
+		return 0
+	}
+	return n
 }
 
 // CheckRemote tries to connect to a remote port, and returns false if it fails.
