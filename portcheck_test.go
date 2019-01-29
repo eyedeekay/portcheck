@@ -61,3 +61,16 @@ func Test_FindNewHostPort(t *testing.T) {
 	}
 	log.Println(i)
 }
+
+func Test_FindNewHostPortShort(t *testing.T) {
+	n, e := net.Listen("tcp", ":8090")
+	if e != nil {
+		t.Fatal(e)
+	}
+	defer n.Close()
+	i := FindLocal(8091)
+	if i == 0 {
+		t.Fatal("Port not found: i == ", i)
+	}
+	log.Println(i)
+}
