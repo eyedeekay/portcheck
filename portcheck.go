@@ -55,6 +55,9 @@ func SCL(port int) bool {
 }
 
 func FindLocal(port int) int {
+    if ! ShortCheckLocal(port) {
+        return port
+    }
 
 	server, err := net.Listen("tcp", ":0")
 

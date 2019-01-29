@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func Test_HostIsOccupied(t *testing.T) {
+func Test_HostPortIsOccupied(t *testing.T) {
 	n, e := net.Listen("tcp", ":8090")
 	if e != nil {
 		t.Fatal(e)
@@ -22,7 +22,7 @@ func Test_HostIsOccupied(t *testing.T) {
 	log.Println(b)
 }
 
-func Test_HostListIsOccupied(t *testing.T) {
+func Test_HostPortListIsOccupied(t *testing.T) {
 	n, e := net.Listen("tcp", ":8090")
 	if e != nil {
 		t.Fatal(e)
@@ -38,7 +38,7 @@ func Test_HostListIsOccupied(t *testing.T) {
 	log.Println(b)
 }
 
-func Test_the_other_thing(t *testing.T) {
+func Test_HostPortIsAvailable(t *testing.T) {
 	b, e := CheckLocal(8090, "127.0.0.1")
 	if e != nil {
 		t.Fatal(e)
@@ -49,7 +49,7 @@ func Test_the_other_thing(t *testing.T) {
 	log.Println(b)
 }
 
-func Test_the_last_thing(t *testing.T) {
+func Test_FindNewHostPort(t *testing.T) {
 	n, e := net.Listen("tcp", ":8090")
 	if e != nil {
 		t.Fatal(e)
