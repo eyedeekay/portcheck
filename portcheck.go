@@ -55,9 +55,9 @@ func SCL(port int) bool {
 }
 
 func FindLocal(port int) int {
-    if ! ShortCheckLocal(port) {
-        return port
-    }
+	if !ShortCheckLocal(port) {
+		return port
+	}
 
 	server, err := net.Listen("tcp", ":0")
 
@@ -79,6 +79,18 @@ func FindLocal(port int) int {
 		return 0
 	}
 	return n
+}
+
+func FL(port int) int {
+	return FindLocal(port)
+}
+
+func StringFindLocal(port int) string {
+	return strconv.Itoa(FindLocal(port))
+}
+
+func SFL(port int) string {
+	return StringFindLocal(port)
 }
 
 // CheckRemote tries to connect to a remote port, and returns false if it fails.
