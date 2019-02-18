@@ -20,14 +20,14 @@ func typeof(v interface{}) string {
 // in use.
 func CheckLocal(port int, hosts ...string) (bool, error) {
 	p := ":" + strconv.Itoa(port)
-	if len(hosts) < 2 {
-		if temp, err := net.Listen("tcp", p); err == nil {
+	if len(hosts) < 1 {
+		if temp, err := net.Listen("tcp", "127.0.0.1"+p); err == nil {
 			temp.Close()
 			return false, nil
 		} else if strings.Contains(err.Error(), "in use") {
 			return true, nil
 		} else {
-			return true, err
+			return false, err
 		}
 	}
 	for _, h := range hosts {
@@ -37,7 +37,7 @@ func CheckLocal(port int, hosts ...string) (bool, error) {
 		} else if strings.Contains(err.Error(), "in use") {
 			return true, nil
 		} else {
-			return true, err
+			return false, err
 		}
 	}
 	return false, nil
