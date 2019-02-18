@@ -20,7 +20,7 @@ func typeof(v interface{}) string {
 // in use.
 func CheckLocal(port int, hosts ...string) (bool, error) {
 	p := ":" + strconv.Itoa(port)
-	if len(hosts) < 1 {
+	if len(hosts) < 2 {
 		if temp, err := net.Listen("tcp", p); err == nil {
 			temp.Close()
 			return false, nil
